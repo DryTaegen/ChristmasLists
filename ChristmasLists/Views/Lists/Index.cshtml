@@ -1,0 +1,63 @@
+﻿@model ChristmasLists.Models.RecipientViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<form asp-controller="Lists" asp-action="Index">
+    <p>
+        <select asp-for="RecipientName" asp-items="Model.Recipient">
+            <option value="">All</option>
+        </select>
+        Search by giver or gift: <input type="text" asp-for="SearchString" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Lists![0].Recipient)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Lists![0].year)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Lists![0].gift)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Lists![0].giver)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Lists!)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Recipient)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.year)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.gift)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.giver)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
